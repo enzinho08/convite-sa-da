@@ -3,7 +3,7 @@ require 'vendor/autoload.php'; // carrega o arquivo de autoload do SendGrid
 
 use SendGrid\Mail\Mail;
 
-$apiKey = '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'; // insira sua chave de API do SendGrid aqui
+$apiKey = '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'; // insira sua chave de API do SendGrid aqui
 
 $email = new Mail();
 $email->setFrom("enzoamancio17@gmail.com", "Enzo");
