@@ -51,24 +51,23 @@
     <p id="resposta"></p>
 
     <script>
-        function aceitarEncontro() {
-            document.getElementById("resposta").innerText = "🎉🥂 Aceito! Mal posso esperar para nosso encontro! 🥰";
-            // Armazenar a resposta em um cookie
-            document.cookie = "resposta=aceito";
-        }
+        // Enviar a resposta por AJAX
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "enviar_email.php", true);
+        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === XMLHttpRequest.DONE) {
+                if (xhr.status === 200) {
+                    console.log("E-mail enviado com sucesso!");
+                } else {
+                    console.error("Erro ao enviar o e-mail:", xhr.responseText);
+                }
+            }
+        };
+        xhr.send();
+    }
 
-        function recusarEncontro() {
-            document.getElementById("resposta").innerText = "😢 Tudo bem, talvez em outra ocasião! 🙃";
-            // Armazenar a resposta em um cookie
-            document.cookie = "resposta=recusado";
-        }
 
-        // Verificar se há um cookie com a resposta
-        const respostaCookie = document.cookie.split(";").find(cookie => cookie.trim().startsWith("resposta="));
-        if (respostaCookie) {
-            const resposta = respostaCookie.split("=")[1];
-            document.getElementById("resposta").innerText = resposta === "aceito" ? "🎉🥂 Aceito!" : "😢 Recusado!";
-        }
     </script>
 </body>
 </html>
