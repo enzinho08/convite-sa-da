@@ -1,18 +1,37 @@
 <!DOCTYPE html>
-<html lang=pt-br>
+<html lang="pt-br">
 <head>
-<meta charset=UTF-8>
-<meta name=viewport content="width=device-width, initial-scale=1.0">
-<title>Convite para um Date</title>
-<style>body{font-family:Arial,sans-serif;background-color:#f9f9f9;text-align:center;padding:20px}h1{color:#ff6b6b}p{font-size:18px;margin-bottom:20px}button{background-color:#ff6b6b;color:#fff;border:0;padding:10px 20px;font-size:16px;cursor:pointer;transition:background-color .3s ease}button:hover{background-color:#e74c3c}#resposta{font-weight:bold;margin-top:20px}</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Convite para um Date</title>
 </head>
 <body>
-<h1>🌟 Convite para um Date 🌟</h1>
-<p>Olá! Você é como uma tag strong ... forte e impactante! 😄</p>
-<p>Gostaria de sair comigo para um encontro? Vamos criar nossa própria página de amor juntos! 💕</p>
-<button onclick=aceitarEncontro()>Sim, vamos!</button>
-<button onclick=recusarEncontro()>Não, obrigado(a)</button>
-<p id=resposta></p>
-<script>function aceitarEncontro(){document.getElementById("resposta").innerText="🎉🥂 Aceito! Mal posso esperar para nosso encontro! 🥰"}function recusarEncontro(){document.getElementById("resposta").innerText="😢 Tudo bem, talvez em outra ocasião! 🙃"};</script>
+    <h1>🌟 Convite para um Date 🌟</h1>
+    <p>Olá! Você é como uma tag <strong>... forte e impactante! 😄</p>
+    <p>Gostaria de sair comigo para um encontro? Vamos criar nossa própria página de amor juntos! 💕</p>
+    <button onclick="aceitarEncontro()">Sim, vamos!</button>
+    <button onclick="recusarEncontro()">Não, obrigado(a)</button>
+    <p id="resposta"></p>
+
+    <script>
+        function aceitarEncontro() {
+            document.getElementById("resposta").innerText = "🎉🥂 Aceito! Mal posso esperar para nosso encontro! 🥰";
+            // Armazenar a resposta em um cookie
+            document.cookie = "resposta=aceito";
+        }
+
+        function recusarEncontro() {
+            document.getElementById("resposta").innerText = "😢 Tudo bem, talvez em outra ocasião! 🙃";
+            // Armazenar a resposta em um cookie
+            document.cookie = "resposta=recusado";
+        }
+
+        // Verificar se há um cookie com a resposta
+        const respostaCookie = document.cookie.split(";").find(cookie => cookie.trim().startsWith("resposta="));
+        if (respostaCookie) {
+            const resposta = respostaCookie.split("=")[1];
+            document.getElementById("resposta").innerText = resposta === "aceito" ? "🎉🥂 Aceito!" : "😢 Recusado!";
+        }
+    </script>
 </body>
 </html>
